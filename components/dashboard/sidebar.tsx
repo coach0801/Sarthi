@@ -6,24 +6,23 @@ import { cn } from "@/lib/utils"
 import {
   LayoutDashboard,
   TrendingUp,
-  Zap,
-  BarChart3,
-  LineChart,
   Users,
-  ClipboardList,
+  LineChart,
+  Package,
+  BadgeIndianRupee,
   Settings,
   ChevronRight,
   Layers,
+  Activity,
 } from "lucide-react"
 
 const NAV_ITEMS = [
   { href: "/dashboard", label: "Home", icon: LayoutDashboard },
-  { href: "/dashboard/margin", label: "Margin", icon: TrendingUp },
-  { href: "/dashboard/actions", label: "Actions", icon: Zap },
-  { href: "/dashboard/channels", label: "Channels", icon: BarChart3 },
-  { href: "/dashboard/forecast", label: "Forecast", icon: LineChart },
-  { href: "/dashboard/benchmarks", label: "Benchmarks", icon: Users },
-  { href: "/dashboard/audit-log", label: "Audit Log", icon: ClipboardList },
+  { href: "/dashboard/profit", label: "Munaafa", icon: TrendingUp, labelHindi: "मुनाफ़ा" },
+  { href: "/dashboard/udhaar", label: "Udhaar", icon: Users, labelHindi: "उधार" },
+  { href: "/dashboard/cashflow", label: "Cash Flow", icon: LineChart },
+  { href: "/dashboard/stock", label: "Stock Alerts", icon: Package },
+  { href: "/dashboard/loan", label: "Loan Ready", icon: BadgeIndianRupee },
 ]
 
 export function Sidebar() {
@@ -36,7 +35,10 @@ export function Sidebar() {
         <div className="flex h-7 w-7 items-center justify-center rounded-md bg-primary">
           <Layers className="h-4 w-4 text-primary-foreground" />
         </div>
-        <span className="font-bold text-base tracking-tight">Sarthi</span>
+        <div>
+          <span className="font-bold text-base tracking-tight">Sarthi</span>
+          <p className="text-[9px] text-muted-foreground leading-none">साथी आपके बिज़नेस का</p>
+        </div>
         <span className="ml-auto text-[10px] text-muted-foreground bg-muted px-1.5 py-0.5 rounded font-medium">BETA</span>
       </div>
 
@@ -57,8 +59,11 @@ export function Sidebar() {
                   )}
                 >
                   <item.icon className="h-4 w-4 flex-shrink-0" />
-                  {item.label}
-                  {isActive && <ChevronRight className="ml-auto h-3 w-3" />}
+                  <span className="flex-1">{item.label}</span>
+                  {"labelHindi" in item && item.labelHindi && (
+                    <span className="text-[10px] text-muted-foreground">{item.labelHindi}</span>
+                  )}
+                  {isActive && <ChevronRight className="h-3 w-3" />}
                 </Link>
               </li>
             )
@@ -68,10 +73,15 @@ export function Sidebar() {
         <div className="mt-4 pt-4 border-t border-border/60">
           <Link
             href="/dashboard/margin-audit"
-            className="flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20 transition-colors"
+            className={cn(
+              "flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+              pathname.startsWith("/dashboard/margin-audit")
+                ? "bg-emerald-500/20 text-emerald-300"
+                : "bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20"
+            )}
           >
-            <TrendingUp className="h-4 w-4" />
-            Margin Audit
+            <Activity className="h-4 w-4" />
+            Business Health Check
           </Link>
         </div>
       </nav>

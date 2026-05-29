@@ -5,221 +5,228 @@ import { Header } from "@/components/dashboard/header"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { generateDemoData, computeSummaryMetrics } from "@/lib/demo-data/generator"
-import { formatCurrency } from "@/lib/utils"
 import {
+  Activity,
   TrendingUp,
-  TrendingDown,
   AlertTriangle,
+  Lightbulb,
   CheckCircle2,
-  Zap,
-  Package,
-  ShoppingCart,
   ArrowRight,
-  Loader2,
+  Users,
+  Package,
+  Clock,
+  MessageCircle,
 } from "lucide-react"
+import Link from "next/link"
 
-const CATEGORY_ICONS: Record<string, React.ElementType> = {
-  rto: AlertTriangle,
-  discount: ShoppingCart,
-  ad_spend: Zap,
-  channel_mix: TrendingUp,
-  sku_mix: Package,
-  pricing: TrendingDown,
-  freight: Package,
-}
-
-const CATEGORY_COLORS: Record<string, string> = {
-  rto: "text-red-400 bg-red-400/10",
-  discount: "text-amber-400 bg-amber-400/10",
-  ad_spend: "text-blue-400 bg-blue-400/10",
-  channel_mix: "text-purple-400 bg-purple-400/10",
-  sku_mix: "text-cyan-400 bg-cyan-400/10",
-  pricing: "text-orange-400 bg-orange-400/10",
-  freight: "text-pink-400 bg-pink-400/10",
-}
-
-const AUDIT_FINDINGS = [
+const FINDINGS = [
   {
     rank: 1,
-    category: "ad_spend",
-    title: "Pause 3 underperforming Meta campaigns destroying ₹1.2L/month in contribution margin",
-    description:
-      "Your Prospecting — Lookalike 1% Mumbai, Broad 25-35F, and Interest-Skincare campaigns have combined 7-day CMPR of -0.06. They're spending ₹4.1L/month collectively but generating negative CM after accounting for channel fees, shipping, COGS, and discounts. The audience overlap between these three is 41% — significant budget cannibalization.",
-    impact: 120000,
-    impactPct: 3.4,
-    recommendation: "Pause all three campaigns immediately. Reallocate ₹2L to your retargeting campaigns (CMPR 3.8x) and ₹2.1L to Brand Search (CMPR 8.5x).",
-    actions: [
-      "Pause Prospecting Lookalike 1% Mumbai (CMPR -0.09, 9 days negative)",
-      "Pause Broad 25-35F campaign (CMPR -0.04, 7 days negative)",
-      "Pause Interest-Skincare (audience overlap 41% with above)",
-      "Reallocate daily budget to Retargeting and Brand Search",
-    ],
     priority: "high",
+    icon: Users,
+    iconColor: "text-red-400 bg-red-500/10",
+    title: "₹41,420 of your dues are overdue more than 45 days",
+    desc: "Mehta Workshop (₹12,800, 67 days), Sharma Garage (₹24,500, 45 days), and Kumar Brothers (₹4,100, 55 days) are high risk of becoming bad debt. After 90 days, chances of recovery drop to less than 30%. You need to contact them this week — not next week.",
+    opportunity: "+₹12,000/month",
+    opportunityNum: 12000,
+    actions: [
+      "Send WhatsApp reminder to Mehta Workshop today (67 days is too long)",
+      "Call Sharma Garage personally — ₹24,500 is your largest single due",
+      "For Kumar Brothers: offer a ₹100 discount if they pay by this Friday",
+      "Set up automatic monthly reminders for all dues from now on",
+    ],
+    href: "/dashboard/udhaar",
+    cta: "Go to Udhaar tracker",
   },
   {
     rank: 2,
-    category: "rto",
-    title: "COD/RTO loss — 5 pincodes account for 28% of your total RTO cost",
-    description:
-      "Pincodes 482001 (Jabalpur), 831001 (Jamshedpur), 263001 (Haldwani), 226003 (Lucknow), and 400097 (Dharavi, Mumbai) collectively have a 38.4% RTO rate on COD orders — 3.2× your brand average. These 5 pincodes are costing ₹2.1L/month in net freight losses (forward + reverse) and inventory damage. The problem is concentrated, not spread.",
-    impact: 84000,
-    impactPct: 2.4,
-    recommendation: "Enable mandatory WhatsApp pre-dispatch confirmation for COD orders from these 5 pincodes. Industry data: this reduces RTO by 40-55% in high-RTO zones.",
-    actions: [
-      "Configure WhatsApp OTP verification for these 5 pincodes via Shiprocket webhook",
-      "Set up auto-retry message if no response within 4 hours (dispatch window)",
-      "Track weekly — if RTO drops <20%, expand to Tier-2/3 COD broadly",
-      "Consider prepaid nudge offer (₹50 cashback) for these pincodes only",
-    ],
     priority: "high",
+    icon: TrendingUp,
+    iconColor: "text-red-400 bg-red-500/10",
+    title: "Engine oil margin at 12.5% is dragging your profit down",
+    desc: "Castrol 1L is your #2 revenue product (₹42,720/month in sales) but it earns you only ₹5,340 in profit — that's only 12.5% margin when everything else in your shop earns 27-43%. If you can get even ₹30 better price from your distributor or switch to a better margin brand, you add real money every month.",
+    opportunity: "+₹8,200/month",
+    opportunityNum: 8200,
+    actions: [
+      "Call your Castrol distributor and ask for ₹30/litre better rate on 10L+ orders",
+      "If they say no, request samples of Motul 5W-30 or Veedol engine oils",
+      "Compare distributor margins from 2-3 brands before next restock",
+      "Target: get engine oil margin to at least 18%",
+    ],
+    href: "/dashboard/profit",
+    cta: "See profit details",
   },
   {
     rank: 3,
-    category: "discount",
-    title: "Amazon discounting strategy is destroying margin on 3 SKUs",
-    description:
-      "Niacinamide Toner, Hyaluronic Acid Moisturizer, and SPF Sunscreen are running at 20-24% discounts on Amazon driven by automated repricing (you're competing on price against Minimalist and Dot & Key). Combined, these 3 SKUs account for ₹8.7L in 30-day Amazon revenue but only 9.2% CM — vs 26% CM on the same SKUs on your Shopify store. The ₹4.2L revenue difference isn't worth the 16.8% margin compression.",
-    impact: 62000,
-    impactPct: 1.8,
-    recommendation: "Cap maximum Amazon discount at 12% across these 3 SKUs. Raise MRP for Niacinamide Toner from ₹449 to ₹549 (in line with Minimalist and Dot & Key positioning).",
+    priority: "medium",
+    icon: Package,
+    iconColor: "text-amber-400 bg-amber-500/10",
+    title: "₹54,250 of dead stock sitting unsold for 60+ days",
+    desc: "Mahindra Thar Mats (47 units, ₹41,830) and Old AC Filters (23 units, ₹12,420) have not sold in 2-3 months. This money is sitting on your shelf doing nothing. If you had this cash free, you could restock your fast-selling Bosch Brake Pads (which runs out every 2 days).",
+    opportunity: "+₹8,000/month freed",
+    opportunityNum: 8000,
     actions: [
-      "Update Amazon repricing rules: max discount 12% for SKUs GNB-NAT-100, GNB-HAM-50, GNB-SPF-100",
-      "Raise MRP on Niacinamide Toner to ₹549 on Amazon (competitive with Minimalist 10% Niacinamide)",
-      "Monitor BSR rank for 14 days to ensure no significant velocity loss",
-      "If BSR drops >30%, revert Sunscreen only and keep Toner/Moisturizer at new pricing",
+      "Discount Thar mats to ₹960 (from ₹1,200) — 20% off. Even 5 sold/week frees ₹4,800",
+      "List both items on OLX Auto Parts or CarTrade spare parts section",
+      "Talk to your Mahindra distributor about returning slow-moving items",
+      "Use the freed cash to restock Bosch Brake Pads — 187 units/month profit driver",
     ],
-    priority: "high",
+    href: "/dashboard/stock",
+    cta: "View stock alerts",
   },
   {
     rank: 4,
-    category: "channel_mix",
-    title: "Blinkit margin is 14.2% vs 26% on Shopify — shift Vitamin C Serum mix toward D2C",
-    description:
-      "Your Vitamin C Serum 30ml generates 26.1% CM on Shopify but only 14.2% on Blinkit (due to 18% platform commission + Q-commerce ad spend). You're currently splitting inventory roughly 60/40 between Blinkit/Zepto and Shopify. Given that Shopify has 40% more capacity through your existing audience, shifting 15% of Vitamin C Serum volume from Q-commerce to Shopify improves blended CM% by 1.8 percentage points.",
-    impact: 54000,
-    impactPct: 1.5,
-    recommendation: "Shift 15% of Vitamin C Serum allocation from Blinkit/Zepto to Shopify D2C through increased investment in bottom-funnel retargeting (existing cart visitors showing high intent for this specific SKU).",
-    actions: [
-      "Increase Shopify-specific retargeting budget for Vitamin C Serum by ₹25,000/month",
-      "Reduce Blinkit ad bids for Vitamin C Serum by 15% (reduce new customer acquisition there)",
-      "Use WhatsApp broadcast to existing customers: 'Vitamin C Serum restock — free shipping on sarthi.store'",
-      "Redirect Zepto Vitamin C Serum ad spend to Retinol Night Cream (higher margin on Q-commerce)",
-    ],
     priority: "medium",
+    icon: Clock,
+    iconColor: "text-amber-400 bg-amber-500/10",
+    title: "Cash runway of 19 days — one bad month puts you in trouble",
+    desc: "Your ₹42,800 in bank only lasts 19 days at current spending. While your monthly income far exceeds expenses (₹3,18,450 revenue vs ~₹2,45,000 cost), delays in sales collection or one unexpected expense can cause a cash crunch. This is more about timing than profitability.",
+    opportunity: "+₹7,200/month if improved",
+    opportunityNum: 7200,
+    actions: [
+      "Collect dues from Sharma Garage (₹24,500) before Jun 8 Bosch payment",
+      "Ask top 3 regular customers to pay within 15 days instead of 30",
+      "Keep a minimum ₹50,000 float in bank (target: 30-day runway)",
+      "Consider a small overdraft limit (₹25,000) at your bank as emergency buffer",
+    ],
+    href: "/dashboard/cashflow",
+    cta: "View cash flow",
   },
   {
     rank: 5,
-    category: "freight",
-    title: "Unoptimized courier assignment is adding ₹12/order in avoidable freight cost",
-    description:
-      "Shiprocket audit: for 23% of your orders from metro pincodes, you're using Delhivery Express (avg ₹78/shipment) when the order weight qualifies for Delhivery Surface (avg ₹54/shipment). Surface delivery in metro areas takes only 1 day longer. 847 of your 3,680 orders in the last 30 days were miscategorized — costing ₹20,328 in excess freight.",
-    impact: 28000,
-    impactPct: 0.8,
-    recommendation: "Update Shiprocket courier assignment rules: orders ≤500g to metro pincodes → default Delhivery Surface. Expected savings: ₹22-28K/month.",
+    priority: "low",
+    icon: MessageCircle,
+    iconColor: "text-blue-400 bg-blue-500/10",
+    title: "No WhatsApp payment policy — 38% of dues take longer than needed",
+    desc: "Businesses that send WhatsApp reminders on day 15, day 30, and day 45 of unpaid dues recover 38% more per month than those who rely on in-person reminders. You currently have no systematic reminder system — you wait until you see the customer. This delays collection by an average of 22 days.",
+    opportunity: "+₹5,400/month",
+    opportunityNum: 5400,
     actions: [
-      "Log into Shiprocket → Rules Engine → Add weight/pincode-based courier rule",
-      "Rule: Weight ≤500g AND pincode ∈ metro_list → Delhivery Surface OR Ekart Surface",
-      "Run 14-day A/B on 50% of orders to validate no customer experience degradation",
-      "Monitor NPS and repeat purchase rate for metro cohort during test",
+      "Set a rule: every due older than 15 days gets a WhatsApp message every week",
+      "Use the Sarthi message template (friendly, not harsh)",
+      "Create a simple WhatsApp group 'Ramesh Auto Parts Payments' for bulk reminders",
+      "Offer small incentive: 'Pay within 7 days, get ₹50 discount on next purchase'",
     ],
-    priority: "medium",
+    href: "/dashboard/udhaar",
+    cta: "Send reminders now",
   },
 ]
 
 export default function MarginAuditPage() {
-  const [generating, setGenerating] = useState(false)
-  const [generated, setGenerated] = useState(false)
+  const [completedFindings, setCompletedFindings] = useState<number[]>([])
 
-  const dataset = generateDemoData("skincare", 90)
-  const metrics = computeSummaryMetrics(dataset)
-
-  const totalOpportunity = AUDIT_FINDINGS.reduce((s, f) => s + f.impact, 0)
-
-  function handleGenerate() {
-    setGenerating(true)
-    setTimeout(() => {
-      setGenerating(false)
-      setGenerated(true)
-    }, 2500)
-  }
+  const totalOpportunity = FINDINGS.filter((f) => !completedFindings.includes(f.rank)).reduce(
+    (s, f) => s + f.opportunityNum,
+    0
+  )
+  const healthScore = 67
+  const healthColor = "text-amber-400"
+  const circumference = 2 * Math.PI * 44
+  const dashOffset = circumference - (healthScore / 100) * circumference
 
   return (
     <div className="flex flex-col flex-1">
       <Header
-        title="Margin Audit"
-        subtitle="AI-generated contribution margin deep-dive — Glow & Beyond"
+        title="Business Health Check"
+        subtitle="Ramesh Auto Parts · Your complete business analysis — updated weekly"
       />
 
       <main className="flex-1 p-6 space-y-5">
-        {/* Hero section */}
-        <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-6">
-          <div className="flex items-start justify-between">
+        {/* Hero */}
+        <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-6">
+          <div className="flex items-start justify-between flex-wrap gap-4">
             <div>
-              <Badge variant="success" className="mb-3">Margin Audit — Glow & Beyond</Badge>
+              <Badge variant="warning" className="mb-3">Business Health Check</Badge>
               <h2 className="text-xl font-bold mb-2">
-                We found {AUDIT_FINDINGS.length} margin improvement opportunities
+                We found <span className="text-amber-400">{FINDINGS.length} things to fix</span> in your business
               </h2>
               <p className="text-sm text-zinc-400 max-w-xl">
-                Based on 90 days of cross-channel data from Shopify, Amazon, Blinkit, Zepto, Meta Ads, Google Ads, Razorpay, and Shiprocket.
-                Total identified opportunity: <span className="text-emerald-400 font-bold">{formatCurrency(totalOpportunity, true)}/month</span> in recoverable contribution margin.
+                If you fix all 5, your business could generate{" "}
+                <span className="text-emerald-400 font-bold">+₹{totalOpportunity.toLocaleString("en-IN")}/month</span> more profit.
+                Start with the high priority items first.
               </p>
             </div>
-            <div className="text-right">
-              <p className="text-xs text-muted-foreground">Current CM%</p>
-              <p className="text-3xl font-bold text-amber-400">{metrics.summary.avgCMPct.toFixed(1)}%</p>
-              <p className="text-xs text-muted-foreground mt-1">
-                Target after actions: <span className="text-emerald-400">{(metrics.summary.avgCMPct + 4.2).toFixed(1)}%</span>
-              </p>
+
+            <div className="flex items-center gap-5">
+              <div className="relative flex items-center justify-center">
+                <svg width="90" height="90" viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="44" fill="none" stroke="#27272a" strokeWidth="8" />
+                  <circle
+                    cx="50" cy="50" r="44"
+                    fill="none"
+                    stroke="#f59e0b"
+                    strokeWidth="8"
+                    strokeLinecap="round"
+                    strokeDasharray={circumference}
+                    strokeDashoffset={dashOffset}
+                    transform="rotate(-90 50 50)"
+                  />
+                </svg>
+                <div className="absolute text-center">
+                  <p className={`text-2xl font-bold ${healthColor}`}>{healthScore}</p>
+                  <p className="text-[10px] text-muted-foreground">/100</p>
+                </div>
+              </div>
+              <div className="text-right">
+                <p className="text-sm text-muted-foreground">Current score</p>
+                <p className="text-2xl font-bold text-amber-400">Needs Work</p>
+                <p className="text-xs text-muted-foreground mt-1">Target: 80+ (Healthy)</p>
+              </div>
             </div>
           </div>
 
-          <div className="mt-5 grid grid-cols-4 gap-3">
-            {[
-              { label: "30-Day Revenue", value: formatCurrency(metrics.summary.totalRevenue30d, true) },
-              { label: "Current CM", value: formatCurrency(metrics.summary.totalCM30d, true) },
-              { label: "RTO Rate", value: `${(metrics.summary.rtoRate * 100).toFixed(1)}%` },
-              { label: "Blended ROAS", value: `${metrics.summary.blendedRoas.toFixed(2)}x` },
-            ].map((m) => (
-              <div key={m.label} className="rounded-lg bg-white/4 border border-white/8 p-3 text-center">
-                <p className="text-xs text-muted-foreground">{m.label}</p>
-                <p className="text-lg font-bold mt-1">{m.value}</p>
-              </div>
-            ))}
+          {/* Priority summary */}
+          <div className="mt-5 grid grid-cols-3 gap-3">
+            <div className="rounded-lg bg-red-500/10 border border-red-500/20 p-3 text-center">
+              <p className="text-lg font-bold text-red-400">{FINDINGS.filter(f => f.priority === "high").length}</p>
+              <p className="text-xs text-muted-foreground">High Priority</p>
+            </div>
+            <div className="rounded-lg bg-amber-500/10 border border-amber-500/20 p-3 text-center">
+              <p className="text-lg font-bold text-amber-400">{FINDINGS.filter(f => f.priority === "medium").length}</p>
+              <p className="text-xs text-muted-foreground">Medium Priority</p>
+            </div>
+            <div className="rounded-lg bg-blue-500/10 border border-blue-500/20 p-3 text-center">
+              <p className="text-lg font-bold text-blue-400">{FINDINGS.filter(f => f.priority === "low").length}</p>
+              <p className="text-xs text-muted-foreground">Quick Win</p>
+            </div>
           </div>
         </div>
 
         {/* Findings */}
         <div className="space-y-4">
           <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-            5 Findings — Ranked by Impact
+            {FINDINGS.length} Findings — Ranked by Impact
           </h3>
-          {AUDIT_FINDINGS.map((finding) => {
-            const Icon = CATEGORY_ICONS[finding.category] ?? TrendingUp
-            const colorClass = CATEGORY_COLORS[finding.category] ?? "text-blue-400 bg-blue-400/10"
+
+          {FINDINGS.map((finding) => {
+            const isCompleted = completedFindings.includes(finding.rank)
+            const Icon = finding.icon
+
             return (
-              <Card key={finding.rank} className="border-border/60">
+              <Card
+                key={finding.rank}
+                className={`border-border/60 transition-opacity ${isCompleted ? "opacity-50" : ""}`}
+              >
                 <CardContent className="p-5">
                   <div className="flex items-start gap-4">
-                    <div className={`flex-shrink-0 h-10 w-10 rounded-lg flex items-center justify-center ${colorClass}`}>
+                    <div className={`flex-shrink-0 h-10 w-10 rounded-lg flex items-center justify-center ${finding.iconColor}`}>
                       <Icon className="h-5 w-5" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
+                      <div className="flex items-center gap-2 mb-2 flex-wrap">
                         <span className="text-xs text-muted-foreground font-medium">#{finding.rank}</span>
-                        <Badge variant={finding.priority === "high" ? "destructive" : "warning"}>
-                          {finding.priority.toUpperCase()}
+                        <Badge variant={finding.priority === "high" ? "destructive" : finding.priority === "medium" ? "warning" : "outline"}>
+                          {finding.priority === "high" ? "HIGH PRIORITY" : finding.priority === "medium" ? "MEDIUM" : "QUICK WIN"}
                         </Badge>
                         <span className="ml-auto text-emerald-400 font-bold text-sm">
-                          +{formatCurrency(finding.impact, true)}/mo
+                          {finding.opportunity}
                         </span>
-                        <span className="text-xs text-muted-foreground">({finding.impactPct}% of revenue)</span>
                       </div>
                       <h4 className="font-semibold text-sm mb-2">{finding.title}</h4>
-                      <p className="text-xs text-zinc-400 leading-relaxed mb-3">{finding.description}</p>
+                      <p className="text-xs text-zinc-400 leading-relaxed mb-3">{finding.desc}</p>
 
-                      <div className="rounded-md bg-muted/40 border border-border/40 p-3">
-                        <p className="text-xs font-medium text-foreground mb-2">Recommended Actions:</p>
+                      <div className="rounded-md bg-muted/40 border border-border/40 p-3 mb-3">
+                        <p className="text-xs font-medium text-foreground mb-2">What to do:</p>
                         <ol className="space-y-1">
                           {finding.actions.map((action, i) => (
                             <li key={i} className="flex gap-2 text-xs text-zinc-400">
@@ -229,6 +236,29 @@ export default function MarginAuditPage() {
                           ))}
                         </ol>
                       </div>
+
+                      <div className="flex items-center gap-2">
+                        <Button size="sm" variant="outline" className="h-7 text-xs" asChild>
+                          <Link href={finding.href}>
+                            {finding.cta}
+                            <ArrowRight className="h-3 w-3 ml-1" />
+                          </Link>
+                        </Button>
+                        {!isCompleted ? (
+                          <button
+                            onClick={() => setCompletedFindings((p) => [...p, finding.rank])}
+                            className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1 transition-colors"
+                          >
+                            <CheckCircle2 className="h-3.5 w-3.5" />
+                            Mark as done
+                          </button>
+                        ) : (
+                          <span className="text-xs text-emerald-400 flex items-center gap-1">
+                            <CheckCircle2 className="h-3.5 w-3.5" />
+                            Completed
+                          </span>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </CardContent>
@@ -237,23 +267,24 @@ export default function MarginAuditPage() {
           })}
         </div>
 
-        {/* CTA */}
-        <div className="rounded-xl border border-blue-500/20 bg-blue-500/5 p-6 text-center">
-          <h3 className="font-semibold mb-2">Want Sarthi to execute these automatically?</h3>
-          <p className="text-sm text-zinc-400 mb-4">
-            Enable auto-execution for safe actions (campaign pauses under ₹2L, COD verification rules) and proposal-mode for everything else. Every action is reversible within 24 hours.
-          </p>
-          <div className="flex items-center justify-center gap-3">
-            <Button>
-              <Zap className="h-4 w-4" />
-              Enable Agent Execution
+        {/* Bottom CTA */}
+        <Card className="border-blue-500/20 bg-blue-500/5">
+          <CardContent className="p-5 flex items-center justify-between gap-4 flex-wrap">
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <Activity className="h-5 w-5 text-blue-400" />
+                <h3 className="font-semibold">Want Sarthi to remind you every week?</h3>
+              </div>
+              <p className="text-sm text-zinc-400">
+                This health check updates every Monday morning. We'll WhatsApp you if anything gets worse.
+              </p>
+            </div>
+            <Button className="bg-blue-500 hover:bg-blue-600 text-white flex-shrink-0">
+              <MessageCircle className="h-4 w-4 mr-2" />
+              Enable Weekly WhatsApp Report
             </Button>
-            <Button variant="outline">
-              Schedule onboarding call
-              <ArrowRight className="h-4 w-4" />
-            </Button>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       </main>
     </div>
   )
