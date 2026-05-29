@@ -73,8 +73,8 @@ export default function ForecastPage() {
     <div className="flex flex-col flex-1">
       <Header title="Forecast" subtitle="Revenue and contribution margin projections — 30/60/90 days" />
 
-      <main className="flex-1 p-6 space-y-5">
-        <div className="grid grid-cols-3 gap-4">
+      <main className="flex-1 p-4 lg:p-6 space-y-4 lg:space-y-5">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {scenarios.map((s) => (
             <Card key={s.name} className="border-border/60">
               <CardHeader className="pb-2">
@@ -125,7 +125,7 @@ export default function ForecastPage() {
           </CardContent>
         </Card>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Card className="border-border/60">
             <CardHeader className="pb-2">
               <CardTitle>Key Assumptions</CardTitle>

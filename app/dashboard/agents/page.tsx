@@ -151,24 +151,22 @@ export default function AgentsPage() {
         subtitle="4 agents active — monitoring 9 data sources in real time"
       />
 
-      <main className="flex-1 p-6 space-y-6">
+      <main className="flex-1 p-4 lg:p-6 space-y-4 lg:space-y-6">
         {/* Status bar */}
-        <div className="flex items-center gap-4 rounded-lg border border-emerald-500/20 bg-emerald-500/5 p-4">
+        <div className="flex flex-wrap items-center gap-3 rounded-lg border border-emerald-500/20 bg-emerald-500/5 p-3 lg:p-4">
           <div className="flex items-center gap-2">
             <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse" />
             <span className="text-sm font-medium text-emerald-400">All 4 agents operational</span>
           </div>
-          <div className="h-4 w-px bg-white/10" />
-          <span className="text-xs text-muted-foreground">Last data refresh: 2 min ago</span>
-          <div className="h-4 w-px bg-white/10" />
-          <span className="text-xs text-muted-foreground">5 actions pending in Action Center</span>
+          <span className="text-xs text-muted-foreground hidden sm:block">· Last refresh: 2 min ago</span>
+          <span className="text-xs text-muted-foreground hidden sm:block">· 5 actions pending</span>
           <Link href="/dashboard/actions" className="ml-auto text-xs text-blue-400 hover:underline flex items-center gap-1">
             Review actions <ArrowRight className="h-3 w-3" />
           </Link>
         </div>
 
         {/* Agent cards */}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {AGENTS.map((agent) => {
             const Icon = agent.icon
             return (
@@ -241,7 +239,7 @@ export default function AgentsPage() {
             <p className="text-xs text-muted-foreground">{AGENT_SYSTEM.description}</p>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {AGENT_SYSTEM.layers.map((layer, i) => (
                 <div key={layer.name} className="rounded-md border border-border/40 bg-white/2 p-3">
                   <div className="flex items-center gap-2 mb-1">

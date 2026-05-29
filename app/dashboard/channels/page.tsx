@@ -30,7 +30,7 @@ export default function ChannelsPage() {
     <div className="flex flex-col flex-1">
       <Header title="Channels" subtitle="Data connectors and per-channel performance" />
 
-      <main className="flex-1 p-6 space-y-5">
+      <main className="flex-1 p-4 lg:p-6 space-y-4 lg:space-y-5">
         {/* Connector grid */}
         <Card className="border-border/60">
           <CardHeader className="pb-3">
@@ -51,18 +51,18 @@ export default function ChannelsPage() {
                           : "#6b7280",
                     }}
                   />
-                  <div className="w-32 font-medium text-sm">{conn.label}</div>
-                  <div className="flex-1 text-xs text-muted-foreground">{conn.dataPoints}</div>
-                  <div className="text-xs text-muted-foreground w-28 text-right">
+                  <div className="w-24 sm:w-32 font-medium text-xs sm:text-sm flex-shrink-0">{conn.label}</div>
+                  <div className="flex-1 text-xs text-muted-foreground hidden md:block truncate">{conn.dataPoints}</div>
+                  <div className="text-xs text-muted-foreground flex-shrink-0 sm:w-28 text-right ml-auto">
                     {conn.status === "syncing" ? (
                       <span className="flex items-center gap-1 text-amber-400 justify-end">
                         <RefreshCw className="h-3 w-3 animate-spin" />
-                        Syncing...
+                        <span className="hidden sm:inline">Syncing...</span>
                       </span>
                     ) : conn.status === "connected" ? (
-                      <span className="text-emerald-400">↻ {conn.lastSync}</span>
+                      <span className="text-emerald-400 text-[10px] sm:text-xs">↻ {conn.lastSync}</span>
                     ) : (
-                      <button className="text-blue-400 hover:text-blue-300">Connect →</button>
+                      <button className="text-blue-400 hover:text-blue-300 text-[10px] sm:text-xs">Connect →</button>
                     )}
                   </div>
                 </div>

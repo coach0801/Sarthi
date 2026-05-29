@@ -159,12 +159,13 @@ export default function OnboardingPage() {
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-50 flex flex-col">
       {/* Top bar */}
-      <div className="flex h-14 items-center justify-between px-6 border-b border-white/8">
+      <div className="flex h-14 items-center justify-between px-4 sm:px-6 border-b border-white/8">
         <div className="flex items-center gap-2">
-          <div className="flex h-7 w-7 items-center justify-center rounded-md bg-blue-500">
+          <div className="flex h-7 w-7 items-center justify-center rounded-md bg-primary">
             <Layers className="h-4 w-4 text-white" />
           </div>
           <span className="font-bold">Sarthi</span>
+          <span className="text-[10px] text-zinc-500 hidden sm:inline">🇮🇳 D2C Growth Operator</span>
         </div>
 
         {/* Step progress */}
@@ -192,7 +193,7 @@ export default function OnboardingPage() {
         </div>
       </div>
 
-      <div className="flex-1 flex items-center justify-center p-6">
+      <div className="flex-1 flex items-start sm:items-center justify-center p-4 sm:p-6 pt-6">
         {/* Step 0: Brand Profile */}
         {step === 0 && (
           <div className="w-full max-w-md space-y-6">
@@ -257,11 +258,11 @@ export default function OnboardingPage() {
             </div>
 
             <Button
-              className="w-full"
+              className="w-full bg-primary hover:bg-primary/90"
               disabled={!brandName.trim() || !category || !revenueBand}
               onClick={() => setStep(1)}
             >
-              Continue
+              Continue करें
               <ArrowRight className="h-4 w-4 ml-2" />
             </Button>
           </div>
@@ -346,7 +347,7 @@ export default function OnboardingPage() {
                 Back
               </Button>
               <Button
-                className="flex-1"
+                className="flex-1 bg-primary hover:bg-primary/90"
                 disabled={!requiredConnected}
                 onClick={handleStartAudit}
               >

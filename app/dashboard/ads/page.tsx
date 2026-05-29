@@ -172,7 +172,7 @@ export default function AdsPage() {
         subtitle="Campaign-level contribution margin — CMPR replaces ROAS as your north star metric"
       />
 
-      <main className="flex-1 p-6 space-y-6">
+      <main className="flex-1 p-4 lg:p-6 space-y-4 lg:space-y-6">
         {/* CMPR explainer */}
         <div className="rounded-lg border border-blue-500/20 bg-blue-500/5 p-4">
           <p className="text-sm font-medium text-blue-400 mb-1">Why CMPR, not ROAS?</p>
@@ -183,7 +183,7 @@ export default function AdsPage() {
         </div>
 
         {/* Summary KPIs */}
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
           <div className="rounded-lg border border-border/60 bg-white/3 p-4">
             <p className="text-xs text-muted-foreground mb-1">Total Ad Spend (30d)</p>
             <p className="text-xl font-bold">{formatCr(totalSpend)}</p>
@@ -264,7 +264,7 @@ export default function AdsPage() {
             <CardTitle className="text-sm">Campaign Breakdown — Real CM After All Deductions</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
+            <div className="space-y-3 lg:space-y-4">
               {CAMPAIGNS.map((campaign) => {
                 const status = statusConfig[campaign.status as keyof typeof statusConfig]
                 const StatusIcon = status.icon
@@ -273,7 +273,7 @@ export default function AdsPage() {
                 return (
                   <div
                     key={campaign.id}
-                    className={`rounded-xl border p-4 ${
+                    className={`rounded-xl border p-3 lg:p-4 ${
                       isNegative
                         ? "border-red-500/20 bg-red-500/3"
                         : campaign.status === "scale"

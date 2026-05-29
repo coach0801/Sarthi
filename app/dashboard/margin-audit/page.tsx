@@ -146,13 +146,13 @@ export default function MarginAuditPage() {
         subtitle="Glow & Beyond · AI-generated findings — ranked by monthly rupee impact"
       />
 
-      <main className="flex-1 p-6 space-y-5">
+      <main className="flex-1 p-4 lg:p-6 space-y-4 lg:space-y-5">
         {/* Hero */}
-        <div className="rounded-xl border border-blue-500/20 bg-blue-500/5 p-6">
-          <div className="flex items-start justify-between flex-wrap gap-6">
+        <div className="rounded-xl border border-blue-500/20 bg-blue-500/5 p-4 lg:p-6">
+          <div className="flex items-start justify-between flex-wrap gap-4 lg:gap-6">
             <div className="flex-1 min-w-0">
               <Badge variant="info" className="mb-3">Margin Audit — May 29, 2026</Badge>
-              <h2 className="text-xl font-bold mb-2">
+              <h2 className="text-lg lg:text-xl font-bold mb-2">
                 <span className="text-blue-400">{FINDINGS.length} findings</span> identified across your channels
               </h2>
               <p className="text-sm text-zinc-400 max-w-xl">
@@ -165,7 +165,7 @@ export default function MarginAuditPage() {
                 <span className="text-emerald-400 font-bold">{cmPctTarget.toFixed(1)}%</span>.
               </p>
 
-              <div className="mt-4 grid grid-cols-3 gap-3 max-w-sm">
+              <div className="mt-4 grid grid-cols-3 gap-2 lg:gap-3 max-w-sm">
                 <div className="rounded-lg bg-red-500/10 border border-red-500/20 p-3 text-center">
                   <p className="text-lg font-bold text-red-400">
                     {FINDINGS.filter((f) => f.priority === "high").length}
@@ -186,7 +186,7 @@ export default function MarginAuditPage() {
             </div>
 
             {/* CM% gauge */}
-            <div className="flex items-center gap-6 flex-shrink-0">
+            <div className="flex items-center gap-4 lg:gap-6 flex-shrink-0 w-full sm:w-auto justify-center sm:justify-start">
               <div className="text-center">
                 <p className="text-xs text-muted-foreground mb-2">Now</p>
                 <div className="relative flex items-center justify-center">
@@ -243,9 +243,9 @@ export default function MarginAuditPage() {
                 key={finding.rank}
                 className={`border-border/60 transition-opacity ${isCompleted ? "opacity-40" : ""}`}
               >
-                <CardContent className="p-5">
-                  <div className="flex items-start gap-4">
-                    <div className={`flex-shrink-0 h-10 w-10 rounded-lg flex items-center justify-center ${finding.iconColor}`}>
+                <CardContent className="p-4 lg:p-5">
+                  <div className="flex items-start gap-3 lg:gap-4">
+                    <div className={`flex-shrink-0 h-9 w-9 lg:h-10 lg:w-10 rounded-lg flex items-center justify-center ${finding.iconColor}`}>
                       <Icon className="h-5 w-5" />
                     </div>
                     <div className="flex-1 min-w-0">
@@ -262,7 +262,7 @@ export default function MarginAuditPage() {
                         <span className="text-xs text-muted-foreground">
                           {finding.confidence}% confidence
                         </span>
-                        <span className="ml-auto text-emerald-400 font-bold text-sm">
+                        <span className="ml-auto text-emerald-400 font-bold text-xs sm:text-sm">
                           {finding.opportunity}
                         </span>
                       </div>
@@ -316,7 +316,7 @@ export default function MarginAuditPage() {
 
         {/* Bottom summary */}
         <Card className="border-emerald-500/20 bg-emerald-500/5">
-          <CardContent className="p-5 flex items-center justify-between gap-4 flex-wrap">
+          <CardContent className="p-4 lg:p-5 flex items-center justify-between gap-4 flex-wrap">
             <div>
               <div className="flex items-center gap-2 mb-1">
                 <AlertTriangle className="h-5 w-5 text-emerald-400" />

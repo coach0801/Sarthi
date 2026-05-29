@@ -52,18 +52,18 @@ export default function BenchmarksPage() {
         subtitle="Anonymized cross-brand comparison — Skincare & Beauty, ₹10-25Cr ARR (n=28)"
       />
 
-      <main className="flex-1 p-6 space-y-5">
+      <main className="flex-1 p-4 lg:p-6 space-y-4 lg:space-y-5">
         <div className="rounded-lg border border-blue-500/20 bg-blue-500/5 p-4 text-sm text-zinc-300">
           <span className="font-medium text-blue-400">Benchmark cohort:</span> Skincare & Beauty brands with ₹10-25Cr annual revenue, operating Shopify + ≥1 marketplace + ≥1 Q-commerce channel. Data from 28 anonymized brands. All metrics computed from last 30 days. Minimum cohort size for any benchmark: 10 brands.
         </div>
 
         <Card className="border-border/60">
           <CardHeader className="pb-3">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between flex-wrap gap-2">
               <CardTitle>Performance vs Peers</CardTitle>
-              <div className="flex items-center gap-3 text-xs text-muted-foreground">
+              <div className="flex items-center gap-2 lg:gap-3 text-xs text-muted-foreground flex-wrap">
                 <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-blue-400 inline-block" /> Your brand</span>
-                <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-zinc-500 inline-block" /> Median</span>
+                <span className="flex items-center gap-1 hidden sm:flex"><span className="h-2 w-2 rounded-full bg-zinc-500 inline-block" /> Median</span>
                 <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-emerald-400 inline-block" /> Top 25%</span>
               </div>
             </div>
@@ -81,24 +81,24 @@ export default function BenchmarksPage() {
 
                 return (
                   <div key={b.metric} className="border-b border-border/40 pb-4 last:border-0">
-                    <div className="flex items-center justify-between mb-2">
-                      <div>
-                        <span className="text-sm font-medium">{b.metric}</span>
-                        <div className="flex items-center gap-3 mt-0.5 text-xs text-muted-foreground">
+                    <div className="flex items-start justify-between gap-2 mb-2">
+                      <div className="min-w-0 flex-1">
+                        <span className="text-xs sm:text-sm font-medium">{b.metric}</span>
+                        <div className="flex flex-wrap items-center gap-1.5 sm:gap-3 mt-0.5 text-[10px] sm:text-xs text-muted-foreground">
                           <span>You: <span className={`font-medium ${isGreat ? "text-emerald-400" : isGood ? "text-blue-400" : "text-amber-400"}`}>{yoursFormatted}</span></span>
-                          <span>Median: {medianFormatted}</span>
+                          <span className="hidden sm:inline">Median: {medianFormatted}</span>
                           <span>Top 25%: <span className="text-emerald-400">{top25Formatted}</span></span>
                         </div>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Badge variant={isGreat ? "success" : isGood ? "info" : "warning"}>
-                          {Math.round(percentile)}th %ile
+                      <div className="flex items-center gap-1 flex-shrink-0">
+                        <Badge variant={isGreat ? "success" : isGood ? "info" : "warning"} className="text-[10px]">
+                          {Math.round(percentile)}th
                         </Badge>
                         {!isGood && (
-                          <TrendingDown className="h-4 w-4 text-amber-400" />
+                          <TrendingDown className="h-3.5 w-3.5 text-amber-400" />
                         )}
                         {isGreat && (
-                          <TrendingUp className="h-4 w-4 text-emerald-400" />
+                          <TrendingUp className="h-3.5 w-3.5 text-emerald-400" />
                         )}
                       </div>
                     </div>

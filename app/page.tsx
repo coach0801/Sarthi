@@ -11,63 +11,81 @@ import {
   Layers,
   Activity,
   Globe,
+  IndianRupee,
 } from "lucide-react"
 
+const ECOSYSTEM = [
+  "Shopify", "Meta Ads", "Google Ads", "Blinkit", "Zepto",
+  "Amazon", "Razorpay", "Shiprocket", "Tally",
+]
+
 const STATS = [
-  { value: "₹2.93L", label: "Avg monthly opportunity found in first audit" },
-  { value: "13.2% → 8.1%", label: "Average RTO rate reduction in 90 days" },
-  { value: "4 AI Agents", label: "Running 24/7 so you don't have to" },
-  { value: "18% → 28%", label: "Average CM% improvement in first quarter" },
+  { value: "₹2.93L", label: "Avg opportunity found in first audit", hindi: "पहले audit में" },
+  { value: "13% → 8%", label: "Average RTO rate reduction in 90 days", hindi: "RTO rate घटाओ" },
+  { value: "4 AI Agents", label: "Working 24/7 — you stay in control", hindi: "हमेशा काम करते हैं" },
+  { value: "+10pp", label: "Average CM% improvement in first quarter", hindi: "margin improvement" },
 ]
 
 const FEATURES = [
   {
     icon: TrendingUp,
     title: "Margin Truth Ledger",
-    desc: "Real CM = Revenue − GST − Channel Fee − PG Fee − Freight − Ad Attribution − COGS − Packaging − RTO Provision. Per SKU. Per channel. Refreshed every 5 minutes.",
+    hindi: "असली मुनाफ़ा जानो",
+    desc: "Real CM = Revenue − GST − Channel Fee − PG Fee − Freight − Ad Attribution − COGS − Packaging − RTO. Per SKU, per channel, refreshed every 5 minutes.",
     badge: "Core Engine",
     color: "text-emerald-400",
     bg: "bg-emerald-500/10",
+    border: "border-emerald-500/20",
   },
   {
     icon: Bot,
-    title: "Ad Intelligence (CMPR, not ROAS)",
-    desc: "ROAS lies. CMPR (Contribution Margin per Rupee of Ad Spend) tells the truth. See exactly which Meta and Google campaigns are profitable after all deductions.",
+    title: "Ad Intelligence — CMPR",
+    hindi: "ROAS नहीं, CMPR देखो",
+    desc: "ROAS misleads. CMPR (Contribution Margin per Rupee spent) shows which Meta and Google campaigns are actually profitable after every deduction.",
     badge: "Acquisition Agent",
     color: "text-blue-400",
     bg: "bg-blue-500/10",
+    border: "border-blue-500/20",
   },
   {
     icon: ShieldCheck,
     title: "RTO Shield",
-    desc: "Pincode-level RTO risk scoring, COD verification automation, and pre-dispatch WhatsApp confirmation. Cut your return-to-origin losses by 40-55%.",
+    hindi: "वापसी रोको",
+    desc: "Pincode-level RTO risk scoring, COD verification on WhatsApp, pre-dispatch confirmation. Cut return losses by 40–55%.",
     badge: "Margin Analyst",
     color: "text-red-400",
     bg: "bg-red-500/10",
+    border: "border-red-500/20",
   },
   {
     icon: Zap,
     title: "Quick Commerce Ops",
-    desc: "Dark store inventory tracking, daily run rate forecasting, and automatic replenishment triggers across Blinkit, Zepto, and Swiggy Instamart.",
+    hindi: "Dark store हमेशा भरा रहे",
+    desc: "Track Blinkit, Zepto & Instamart dark store inventory daily. Automatic replenishment triggers. Never lose a quick commerce sale to stockout.",
     badge: "QC Agent",
     color: "text-amber-400",
     bg: "bg-amber-500/10",
+    border: "border-amber-500/20",
   },
   {
     icon: BarChart3,
     title: "Peer Benchmarks",
-    desc: "See how your CM%, RTO rate, ROAS, and repeat purchase rate compare to 28 anonymized brands in your category and revenue band.",
+    hindi: "दूसरों से खुद को compare करो",
+    desc: "Compare your CM%, RTO rate, ROAS, and repeat rate vs 28 anonymised brands in your exact category and revenue band.",
     badge: "Insights",
     color: "text-purple-400",
     bg: "bg-purple-500/10",
+    border: "border-purple-500/20",
   },
   {
     icon: Globe,
     title: "Geography-Agnostic",
-    desc: "Built for Indian D2C brands today — but every connector (Shopify, Meta, Google, Amazon) is global. Expand to US, UK, UAE, Singapore without switching tools.",
+    hindi: "भारत पहले, दुनिया बाद में",
+    desc: "Built for Indian D2C brands first — Shopify, Meta, Google, Razorpay are all global. When you expand to US, UK, UAE, you carry the same platform.",
     badge: "Future-Ready",
     color: "text-cyan-400",
     bg: "bg-cyan-500/10",
+    border: "border-cyan-500/20",
   },
 ]
 
@@ -75,25 +93,25 @@ const HOW_IT_WORKS = [
   {
     step: "01",
     title: "Connect in 5 minutes",
-    desc: "OAuth with Shopify, Meta, Google Ads, Razorpay, Shiprocket, and Tally. No spreadsheets. No manual uploads.",
-    color: "text-blue-400",
+    desc: "OAuth with Shopify, Meta Ads, Google Ads, Razorpay, Shiprocket. No spreadsheets.",
+    color: "text-primary",
   },
   {
     step: "02",
-    title: "First Margin Audit in 24 hours",
-    desc: "Sarthi's Margin Analyst agent processes your last 90 days of orders, ad spend, and logistics data — and surfaces your 5 biggest margin leaks, ranked by rupee impact.",
+    title: "Margin Audit in 24 hours",
+    desc: "Margin Analyst agent surfaces your 5 biggest leaks from 90 days of data, ranked by ₹ impact.",
     color: "text-emerald-400",
   },
   {
     step: "03",
-    title: "Approve actions (you stay in control)",
-    desc: "Every agent recommendation shows the reasoning, the confidence score, and the expected monthly impact. You approve, decline, or snooze. Sarthi never acts without you.",
+    title: "Approve actions",
+    desc: "Every recommendation shows reasoning, confidence score, and expected monthly impact. You approve or decline.",
     color: "text-amber-400",
   },
   {
     step: "04",
-    title: "Track improvement weekly",
-    desc: "Every Monday, your Orchestrator agent delivers a weekly brief: what changed, what improved, what needs your attention this week.",
+    title: "Weekly brief — every Monday",
+    desc: "Orchestrator delivers your P&L summary, what improved, and what needs attention this week.",
     color: "text-purple-400",
   },
 ]
@@ -101,52 +119,32 @@ const HOW_IT_WORKS = [
 const TESTIMONIALS = [
   {
     name: "Aditi Rao",
-    business: "Founder, Velvet Skin Co. — Skincare D2C, Mumbai",
+    business: "Velvet Skin Co. — Skincare D2C, Mumbai",
     revenue: "₹8L/month",
-    quote: "Sarthi found that my Vitamin C Serum on Blinkit had a negative contribution margin — the 18% quick commerce fee plus ₹45 freight wiped the profit. I would never have caught that with a spreadsheet. Fixed it in 2 days.",
+    quote: "Sarthi found that my Vitamin C Serum on Blinkit had negative contribution margin — the 18% quick commerce fee plus ₹45 freight wiped the profit. Spreadsheet mein yeh kabhi nahi dikhta.",
     stars: 5,
   },
   {
     name: "Rahul Mahajan",
-    business: "Founder, PureForm Nutrition — Supplements D2C, Delhi",
+    business: "PureForm Nutrition — Supplements, Delhi",
     revenue: "₹12L/month",
-    quote: "The Meta CMPR dashboard is the first thing I open every morning. ROAS was showing 3.8x and I thought I was doing great — but CMPR was 0.19 after GST, channel fee, and freight. One campaign was bleeding ₹38,000/month.",
+    quote: "ROAS 3.8x dikh raha tha, sab theek lag raha tha. But CMPR was 0.19 after GST, freight, and channel fee. Ek campaign alone ₹38,000/month burn kar raha tha.",
     stars: 5,
   },
   {
     name: "Neha Gupta",
-    business: "Founder, Morning Ritual — Wellness D2C, Bangalore",
+    business: "Morning Ritual — Wellness D2C, Bangalore",
     revenue: "₹6L/month",
-    quote: "I was about to hire a performance marketing manager at ₹80,000/month. Sarthi's Acquisition Agent does it better — and shows its reasoning. ₹1,499/month for an AI that watches every campaign 24/7.",
+    quote: "Performance marketing manager hire karne wali thi — ₹80,000/month. Sarthi's Acquisition Agent yeh better karta hai aur reasoning bhi dikhata hai. ₹999/month mein.",
     stars: 5,
   },
 ]
 
 const AGENTS = [
-  {
-    name: "Orchestrator",
-    role: "Coordinates all agents. Delivers daily briefs and weekly P&L summaries.",
-    color: "bg-purple-500/10 border-purple-500/20 text-purple-400",
-    dot: "bg-purple-400",
-  },
-  {
-    name: "Margin Analyst",
-    role: "Finds margin leaks. Flags underpriced SKUs, high-discount channels, RTO hotspots.",
-    color: "bg-blue-500/10 border-blue-500/20 text-blue-400",
-    dot: "bg-blue-400",
-  },
-  {
-    name: "Acquisition Agent",
-    role: "Optimizes ad spend by CMPR. Pauses negative-margin campaigns. Scales winners.",
-    color: "bg-emerald-500/10 border-emerald-500/20 text-emerald-400",
-    dot: "bg-emerald-400",
-  },
-  {
-    name: "Quick Commerce Agent",
-    role: "Tracks dark store inventory. Triggers replenishment. Prevents stockouts.",
-    color: "bg-amber-500/10 border-amber-500/20 text-amber-400",
-    dot: "bg-amber-400",
-  },
+  { name: "Orchestrator", role: "Coordinates all agents. Daily brief + weekly P&L.", dot: "bg-purple-400", tag: "text-purple-400 bg-purple-500/10" },
+  { name: "Margin Analyst", role: "Finds margin leaks. Flags underpriced SKUs, RTO hotspots.", dot: "bg-blue-400", tag: "text-blue-400 bg-blue-500/10" },
+  { name: "Acquisition Agent", role: "Optimizes by CMPR. Pauses negative-margin campaigns.", dot: "bg-emerald-400", tag: "text-emerald-400 bg-emerald-500/10" },
+  { name: "Quick Commerce Agent", role: "Tracks dark stores. Prevents stockouts.", dot: "bg-amber-400", tag: "text-amber-400 bg-amber-500/10" },
 ]
 
 const PRICING = [
@@ -154,12 +152,12 @@ const PRICING = [
     name: "Free Demo",
     price: "₹0",
     period: "forever",
-    desc: "Explore Sarthi with a realistic demo brand",
+    desc: "Full platform with realistic demo brand",
     features: [
-      "Full dashboard with demo data",
+      "All 12 pages with live demo data",
       "Margin Audit walkthrough",
-      "Ad Intelligence preview",
-      "All 4 agents in demo mode",
+      "Ad Intelligence (CMPR) preview",
+      "All 4 AI agents in demo mode",
       "Benchmark comparison",
     ],
     cta: "Start Free Demo",
@@ -169,13 +167,13 @@ const PRICING = [
   {
     name: "Sarthi Pro",
     price: "₹999",
-    period: "per month",
-    desc: "For brands up to ₹5Cr ARR",
+    period: "/ month",
+    desc: "For D2C brands up to ₹5Cr ARR",
     features: [
-      "Everything connected (Shopify, Meta, Google, Razorpay, Shiprocket)",
-      "All 4 AI agents active",
+      "Shopify + Meta + Google + Razorpay + Shiprocket",
+      "All 4 AI agents — real brand data",
       "Real-time Margin Truth Ledger",
-      "RTO Shield + COD verification",
+      "RTO Shield with WhatsApp verification",
       "Quick Commerce inventory alerts",
       "Peer benchmark access",
     ],
@@ -186,15 +184,15 @@ const PRICING = [
   {
     name: "Sarthi Scale",
     price: "₹2,499",
-    period: "per month",
-    desc: "For brands ₹5-50Cr ARR",
+    period: "/ month",
+    desc: "For brands ₹5–50Cr ARR",
     features: [
       "Everything in Pro",
-      "Tally + ERP integration",
+      "Tally Prime + ERP integration",
       "Custom agent rules & thresholds",
-      "Team access (up to 5 seats)",
-      "API access for custom dashboards",
-      "Priority WhatsApp support + onboarding",
+      "Team access (5 seats)",
+      "API + custom dashboards",
+      "Priority WhatsApp support",
     ],
     cta: "Talk to us",
     href: "/sign-up",
@@ -204,176 +202,189 @@ const PRICING = [
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-50">
-      {/* Nav */}
-      <nav className="fixed top-0 left-0 right-0 z-50 flex h-14 items-center justify-between px-6 border-b border-white/8 bg-zinc-950/90 backdrop-blur">
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+
+      {/* ── NAV ─────────────────────────────────────────────────────── */}
+      <nav className="fixed top-0 left-0 right-0 z-50 flex h-14 items-center justify-between px-4 sm:px-6 border-b border-border/60 bg-background/90 backdrop-blur">
         <div className="flex items-center gap-2">
-          <div className="flex h-7 w-7 items-center justify-center rounded-md bg-blue-500">
+          <div className="flex h-7 w-7 items-center justify-center rounded-md bg-primary">
             <Layers className="h-4 w-4 text-white" />
           </div>
           <span className="font-bold text-base">Sarthi</span>
-          <span className="text-xs text-zinc-500 ml-1 hidden sm:inline">— AI growth operator for D2C brands</span>
+          <span className="text-[10px] text-muted-foreground ml-1 hidden md:inline">साथी आपके brand का</span>
         </div>
-        <div className="flex items-center gap-3">
-          <Link href="/sign-in" className="text-sm text-zinc-400 hover:text-white transition-colors px-3 py-1.5">
+        <div className="flex items-center gap-2">
+          <Link href="/sign-in" className="text-sm text-muted-foreground hover:text-foreground transition-colors px-2 py-1.5 hidden sm:block">
             Sign in
           </Link>
-          <Link
-            href="/sign-up"
-            className="text-sm font-medium bg-blue-500 hover:bg-blue-600 text-white px-4 py-1.5 rounded-md transition-colors"
-          >
-            Free Margin Audit
+          <Link href="/sign-up" className="text-sm font-semibold bg-primary hover:bg-primary/90 text-white px-4 py-1.5 rounded-md transition-colors">
+            Free Audit
           </Link>
         </div>
       </nav>
 
-      {/* Hero */}
-      <section className="pt-32 pb-20 px-6 text-center">
-        <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-3 py-1 text-xs text-blue-400 mb-8">
-          <span className="h-1.5 w-1.5 rounded-full bg-blue-400 animate-pulse" />
-          India&apos;s first margin-first multi-agent platform for D2C founders
+      {/* ── HERO ────────────────────────────────────────────────────── */}
+      <section className="india-glow pt-28 pb-16 px-4 sm:px-6 text-center">
+        {/* Trust badges */}
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-6">
+          <div className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs text-primary font-medium">
+            <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+            🇮🇳 Made in Bharat · India-first
+          </div>
+          <div className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs text-emerald-400">
+            <Activity className="h-3 w-3" />
+            4 AI Agents Live
+          </div>
         </div>
 
-        <h1 className="mx-auto max-w-4xl text-4xl sm:text-5xl font-bold leading-tight tracking-tight">
+        <h1 className="mx-auto max-w-3xl text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight tracking-tight">
           Stop leaving money on the table.{" "}
-          <span className="text-blue-400">Know your real margin</span>{" "}
+          <span className="saffron-text">Know your real margin</span>{" "}
           — by SKU, by channel, by hour.
         </h1>
 
-        <p className="mt-6 mx-auto max-w-2xl text-base text-zinc-400 leading-relaxed">
+        <p className="mt-3 text-sm text-muted-foreground font-medium tracking-wide">
+          सही margin जानो · सही फ़ैसला करो · सही brand बनाओ
+        </p>
+
+        <p className="mt-5 mx-auto max-w-xl text-sm sm:text-base text-muted-foreground leading-relaxed">
           Sarthi connects your Shopify, Meta Ads, Google Ads, Blinkit, and Amazon — then runs 4 AI agents 24/7 to find margin leaks, cut RTO losses, and scale only the campaigns that actually make money.
         </p>
 
-        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
+        {/* Ecosystem pills */}
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-1.5">
+          {ECOSYSTEM.map((name) => (
+            <span key={name} className="text-xs text-muted-foreground border border-border/60 bg-white/3 px-2.5 py-1 rounded-full">
+              {name}
+            </span>
+          ))}
+        </div>
+
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
           <Link
             href="/sign-up"
-            className="flex items-center gap-2 rounded-md bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-3 text-sm transition-colors"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-md bg-primary hover:bg-primary/90 text-white font-semibold px-6 py-3 text-sm transition-colors"
           >
-            Start your free Margin Audit
+            <IndianRupee className="h-4 w-4" />
+            Start Free Margin Audit
             <ArrowRight className="h-4 w-4" />
           </Link>
           <Link
             href="/dashboard"
-            className="flex items-center gap-2 rounded-md border border-white/10 hover:border-white/20 text-zinc-300 hover:text-white font-medium px-6 py-3 text-sm transition-colors"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-md border border-border/60 hover:border-border text-muted-foreground hover:text-foreground font-medium px-6 py-3 text-sm transition-colors"
           >
             <Activity className="h-4 w-4" />
-            See live demo dashboard
+            Live Demo Dashboard
           </Link>
         </div>
-        <p className="mt-3 text-xs text-zinc-500">No credit card · No spreadsheets · Connect in 5 minutes</p>
+        <p className="mt-3 text-xs text-muted-foreground">No credit card · 5 minute setup · Hindi + English</p>
       </section>
 
-      {/* Stats */}
-      <section className="px-6 pb-20">
-        <div className="mx-auto max-w-4xl grid grid-cols-2 md:grid-cols-4 gap-4">
+      {/* ── STATS ───────────────────────────────────────────────────── */}
+      <section className="px-4 sm:px-6 pb-16">
+        <div className="mx-auto max-w-4xl grid grid-cols-2 lg:grid-cols-4 gap-3">
           {STATS.map((s) => (
-            <div key={s.value} className="rounded-lg border border-white/8 bg-white/3 p-5 text-center">
-              <p className="text-xl font-bold text-blue-400">{s.value}</p>
-              <p className="mt-1 text-xs text-zinc-400">{s.label}</p>
+            <div key={s.value} className="rounded-xl border border-border/60 bg-card p-4 text-center">
+              <p className="text-xl sm:text-2xl font-bold text-primary">{s.value}</p>
+              <p className="mt-1 text-xs text-muted-foreground">{s.label}</p>
+              <p className="mt-0.5 text-[10px] text-primary/60 font-medium">{s.hindi}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* 4 Agents showcase */}
-      <section className="px-6 pb-20 border-t border-white/8 pt-16">
+      {/* ── 4 AGENTS ────────────────────────────────────────────────── */}
+      <section className="px-4 sm:px-6 pb-16 border-t border-border/60 pt-16">
         <div className="mx-auto max-w-4xl">
-          <div className="text-center mb-10">
-            <h2 className="text-2xl font-bold mb-3">4 AI agents. One platform.</h2>
-            <p className="text-sm text-zinc-400 max-w-xl mx-auto">
-              Unlike a dashboard that just shows data, Sarthi&apos;s agents watch your business in real time, propose specific actions, and show their reasoning. You approve. They execute.
+          <div className="text-center mb-8">
+            <h2 className="text-xl sm:text-2xl font-bold mb-2">4 AI agents. एक platform.</h2>
+            <p className="text-sm text-muted-foreground max-w-lg mx-auto">
+              Unlike a dashboard that just shows data, Sarthi&apos;s agents watch your business in real time, propose specific actions with reasoning, and wait for your approval before executing.
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {AGENTS.map((agent) => (
-              <div
-                key={agent.name}
-                className={`rounded-xl border p-5 ${agent.color.split(" ").slice(0, 2).join(" ")}`}
-              >
-                <div className="flex items-center gap-2 mb-2">
-                  <span className={`h-2 w-2 rounded-full ${agent.dot} animate-pulse`} />
-                  <span className={`text-sm font-semibold ${agent.color.split(" ")[2]}`}>{agent.name}</span>
-                  <span className="ml-auto text-[10px] text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">ACTIVE</span>
+              <div key={agent.name} className="rounded-xl border border-border/60 bg-card p-4">
+                <div className="flex items-center gap-2.5 mb-2">
+                  <span className={`h-2 w-2 rounded-full ${agent.dot} animate-pulse flex-shrink-0`} />
+                  <span className={`text-sm font-semibold px-2 py-0.5 rounded-full text-xs ${agent.tag}`}>
+                    {agent.name}
+                  </span>
+                  <span className="ml-auto text-[10px] text-muted-foreground bg-muted px-1.5 py-0.5 rounded">ACTIVE</span>
                 </div>
-                <p className="text-xs text-zinc-400 leading-relaxed">{agent.role}</p>
+                <p className="text-xs text-muted-foreground leading-relaxed">{agent.role}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Features */}
-      <section className="px-6 pb-24 border-t border-white/8 pt-20">
+      {/* ── FEATURES ────────────────────────────────────────────────── */}
+      <section className="px-4 sm:px-6 pb-20 border-t border-border/60 pt-16">
         <div className="mx-auto max-w-5xl">
-          <h2 className="text-center text-2xl font-bold mb-3">
-            Every metric that matters to a D2C founder
-          </h2>
-          <p className="text-center text-sm text-zinc-400 mb-12">
-            Not vanity metrics. Real contribution margin, tracked automatically.
-          </p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="text-center mb-10">
+            <h2 className="text-xl sm:text-2xl font-bold mb-2">Every metric that matters to a D2C founder</h2>
+            <p className="text-sm text-muted-foreground">हर rupee की सच — tracked automatically</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {FEATURES.map((f) => (
-              <div key={f.title} className="rounded-xl border border-white/8 bg-white/3 p-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className={`flex h-10 w-10 items-center justify-center rounded-lg ${f.bg}`}>
-                    <f.icon className={`h-5 w-5 ${f.color}`} />
+              <div key={f.title} className={`rounded-xl border ${f.border} bg-card p-5`}>
+                <div className="flex items-center gap-3 mb-3">
+                  <div className={`flex h-9 w-9 items-center justify-center rounded-lg ${f.bg} flex-shrink-0`}>
+                    <f.icon className={`h-4.5 w-4.5 ${f.color}`} />
                   </div>
                   <span className={`text-xs font-medium ${f.color} bg-white/5 px-2 py-0.5 rounded-full`}>
                     {f.badge}
                   </span>
                 </div>
-                <h3 className="font-semibold mb-2">{f.title}</h3>
-                <p className="text-sm text-zinc-400 leading-relaxed">{f.desc}</p>
+                <h3 className="font-semibold text-sm mb-0.5">{f.title}</h3>
+                <p className="text-[10px] text-primary/70 font-medium mb-2">{f.hindi}</p>
+                <p className="text-xs text-muted-foreground leading-relaxed">{f.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* How it works */}
-      <section className="px-6 pb-24 border-t border-white/8 pt-20">
+      {/* ── HOW IT WORKS ────────────────────────────────────────────── */}
+      <section className="px-4 sm:px-6 pb-20 border-t border-border/60 pt-16">
         <div className="mx-auto max-w-4xl">
-          <h2 className="text-center text-2xl font-bold mb-3">How Sarthi works</h2>
-          <p className="text-center text-sm text-zinc-400 mb-12">
-            From zero to first insight in under 24 hours.
-          </p>
-          <div className="grid md:grid-cols-4 gap-6">
+          <div className="text-center mb-10">
+            <h2 className="text-xl sm:text-2xl font-bold mb-2">कैसे काम करता है Sarthi?</h2>
+            <p className="text-sm text-muted-foreground">From zero to first insight in under 24 hours</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {HOW_IT_WORKS.map((step, i) => (
               <div key={step.step} className="relative">
-                {i < HOW_IT_WORKS.length - 1 && (
-                  <div className="hidden md:block absolute top-6 left-full w-full h-px bg-white/10 -translate-x-4" />
-                )}
                 <div className={`text-3xl font-black ${step.color} mb-3`}>{step.step}</div>
-                <h3 className="font-semibold text-sm mb-2">{step.title}</h3>
-                <p className="text-xs text-zinc-400 leading-relaxed">{step.desc}</p>
+                <h3 className="font-semibold text-sm mb-1.5">{step.title}</h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">{step.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="px-6 pb-24 border-t border-white/8 pt-20">
+      {/* ── TESTIMONIALS ────────────────────────────────────────────── */}
+      <section className="px-4 sm:px-6 pb-20 border-t border-border/60 pt-16">
         <div className="mx-auto max-w-5xl">
-          <h2 className="text-center text-2xl font-bold mb-3">
-            Built for founders who run lean
-          </h2>
-          <p className="text-center text-sm text-zinc-400 mb-12">
-            Solo founders, 2-person teams — getting enterprise-grade intelligence without the enterprise cost.
-          </p>
-          <div className="grid md:grid-cols-3 gap-5">
+          <div className="text-center mb-10">
+            <h2 className="text-xl sm:text-2xl font-bold mb-2">Founders speak — unfiltered</h2>
+            <p className="text-sm text-muted-foreground">Solo founders & 2-person teams getting enterprise-grade intelligence</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {TESTIMONIALS.map((t) => (
-              <div key={t.name} className="rounded-xl border border-white/8 bg-white/3 p-6 flex flex-col">
+              <div key={t.name} className="rounded-xl border border-border/60 bg-card p-5 flex flex-col">
                 <div className="flex mb-3">
                   {Array.from({ length: t.stars }).map((_, i) => (
-                    <Star key={i} className="h-4 w-4 text-amber-400 fill-amber-400" />
+                    <Star key={i} className="h-3.5 w-3.5 text-amber-400 fill-amber-400" />
                   ))}
                 </div>
-                <p className="text-sm text-zinc-300 leading-relaxed italic flex-1 mb-4">&quot;{t.quote}&quot;</p>
-                <div className="border-t border-white/8 pt-4">
+                <p className="text-xs text-muted-foreground leading-relaxed italic flex-1 mb-4">&quot;{t.quote}&quot;</p>
+                <div className="border-t border-border/60 pt-3">
                   <p className="text-sm font-semibold">{t.name}</p>
-                  <p className="text-xs text-zinc-500">{t.business}</p>
-                  <p className="text-xs text-blue-400 mt-0.5">{t.revenue} GMV</p>
+                  <p className="text-xs text-muted-foreground">{t.business}</p>
+                  <p className="text-xs text-primary mt-0.5 font-medium">{t.revenue} GMV</p>
                 </div>
               </div>
             ))}
@@ -381,57 +392,60 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Margin formula callout */}
-      <section className="px-6 pb-24">
-        <div className="mx-auto max-w-4xl rounded-2xl border border-white/10 bg-white/3 p-8">
-          <h3 className="text-center text-sm font-medium text-zinc-400 uppercase tracking-wider mb-4">
-            The Sarthi Contribution Margin Formula
-          </h3>
-          <div className="font-mono text-xs sm:text-sm text-center leading-loose text-zinc-300">
-            <span className="text-emerald-400 font-bold">CM</span>
+      {/* ── CM FORMULA ──────────────────────────────────────────────── */}
+      <section className="px-4 sm:px-6 pb-20">
+        <div className="mx-auto max-w-3xl rounded-2xl border border-primary/20 bg-primary/5 p-6 sm:p-8">
+          <p className="text-center text-xs font-semibold text-primary uppercase tracking-widest mb-4">
+            Sarthi Contribution Margin Formula
+          </p>
+          <div className="font-mono text-xs sm:text-sm text-center leading-7 text-muted-foreground">
+            <span className="text-emerald-400 font-bold text-sm sm:text-base">CM</span>
             {" = Gross Revenue"}
+            <br />
             <span className="text-red-400"> − Discount − GST − Channel Fee − PG Fee</span>
             <br />
             <span className="text-red-400"> − Freight Forward − Freight Reverse − Ad Attribution</span>
             <br />
             <span className="text-red-400"> − COGS − Packaging Cost − RTO Provision</span>
           </div>
-          <p className="text-center text-xs text-zinc-500 mt-4">
-            This is the number that actually tells you if your brand is healthy. Not revenue. Not ROAS. CM.
+          <p className="text-center text-xs text-muted-foreground mt-4">
+            यही असली number है। Revenue नहीं। ROAS नहीं। <strong className="text-foreground">Contribution Margin.</strong>
           </p>
         </div>
       </section>
 
-      {/* Pricing */}
-      <section className="px-6 pb-24 border-t border-white/8 pt-20">
+      {/* ── PRICING ─────────────────────────────────────────────────── */}
+      <section className="px-4 sm:px-6 pb-20 border-t border-border/60 pt-16">
         <div className="mx-auto max-w-4xl">
-          <h2 className="text-center text-2xl font-bold mb-3">Simple pricing. No surprises.</h2>
-          <p className="text-center text-sm text-zinc-400 mb-12">
-            Start with the free demo — upgrade when you see real value.
-          </p>
-          <div className="grid md:grid-cols-3 gap-5">
+          <div className="text-center mb-10">
+            <h2 className="text-xl sm:text-2xl font-bold mb-2">Simple, honest pricing</h2>
+            <p className="text-sm text-muted-foreground">Start free. Upgrade only when you see real value.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {PRICING.map((p) => (
               <div
                 key={p.name}
-                className={`rounded-xl border p-6 flex flex-col ${
-                  p.highlight ? "border-blue-500/50 bg-blue-500/5" : "border-white/8 bg-white/3"
+                className={`rounded-xl border p-5 flex flex-col ${
+                  p.highlight
+                    ? "border-primary/40 bg-primary/5"
+                    : "border-border/60 bg-card"
                 }`}
               >
                 {p.highlight && (
-                  <span className="text-xs font-semibold text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded-full self-start mb-3">
+                  <span className="text-xs font-semibold text-primary bg-primary/10 px-2 py-0.5 rounded-full self-start mb-3">
                     Most Popular
                   </span>
                 )}
-                <h3 className="font-bold text-lg">{p.name}</h3>
-                <div className="mt-2 mb-1">
-                  <span className="text-3xl font-bold">{p.price}</span>
-                  <span className="text-sm text-zinc-400 ml-1">/{p.period}</span>
+                <h3 className="font-bold text-base">{p.name}</h3>
+                <div className="mt-1.5 mb-1">
+                  <span className="text-2xl sm:text-3xl font-bold">{p.price}</span>
+                  <span className="text-sm text-muted-foreground ml-1">{p.period}</span>
                 </div>
-                <p className="text-xs text-zinc-500 mb-5">{p.desc}</p>
-                <ul className="space-y-2 flex-1 mb-6">
+                <p className="text-xs text-muted-foreground mb-4">{p.desc}</p>
+                <ul className="space-y-2 flex-1 mb-5">
                   {p.features.map((f) => (
-                    <li key={f} className="flex items-start gap-2 text-sm text-zinc-300">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                    <li key={f} className="flex items-start gap-2 text-xs text-muted-foreground">
+                      <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
                       {f}
                     </li>
                   ))}
@@ -440,8 +454,8 @@ export default function LandingPage() {
                   href={p.href}
                   className={`flex items-center justify-center gap-2 rounded-md font-semibold px-4 py-2.5 text-sm transition-colors ${
                     p.highlight
-                      ? "bg-blue-500 hover:bg-blue-600 text-white"
-                      : "border border-white/10 hover:border-white/20 text-zinc-300 hover:text-white"
+                      ? "bg-primary hover:bg-primary/90 text-white"
+                      : "border border-border/60 hover:border-border text-muted-foreground hover:text-foreground"
                   }`}
                 >
                   {p.cta}
@@ -450,43 +464,61 @@ export default function LandingPage() {
               </div>
             ))}
           </div>
+
+          {/* Indian trust signals */}
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+            {["GST compliant", "UPI ready", "RBI guidelines", "AWS Mumbai", "DPDP Act compliant"].map((t) => (
+              <span key={t} className="text-xs text-muted-foreground border border-border/40 px-2.5 py-1 rounded-full">
+                ✓ {t}
+              </span>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="px-6 pb-20 text-center">
-        <div className="mx-auto max-w-2xl rounded-2xl border border-blue-500/20 bg-blue-500/5 p-12">
-          <h2 className="text-2xl font-bold mb-3">
-            Your first Margin Audit is free.
+      {/* ── FINAL CTA ───────────────────────────────────────────────── */}
+      <section className="px-4 sm:px-6 pb-16 text-center">
+        <div className="mx-auto max-w-xl rounded-2xl border border-primary/20 bg-primary/5 p-8 sm:p-12">
+          <div className="text-3xl mb-3">🪔</div>
+          <h2 className="text-xl sm:text-2xl font-bold mb-2">
+            Pehla Margin Audit free hai.
           </h2>
-          <p className="text-sm text-zinc-400 mb-8 max-w-md mx-auto">
-            Connect Shopify + Meta + Google in 5 minutes. Get your 5 biggest margin leaks ranked by rupee impact — in 24 hours.
+          <p className="text-xs sm:text-sm text-muted-foreground mb-6 max-w-sm mx-auto">
+            Connect Shopify + Meta + Google in 5 minutes. Get 5 findings ranked by ₹ impact — in 24 hours.
           </p>
-          <div className="flex flex-col gap-3 items-center mb-8">
-            {[
-              "No spreadsheets or manual exports",
-              "Works with your existing Shopify + Meta + Google",
-              "India-first, globally ready",
-            ].map((point) => (
-              <div key={point} className="flex items-center gap-2 text-sm text-zinc-300">
-                <CheckCircle2 className="h-4 w-4 text-emerald-400" />
-                {point}
+          <div className="space-y-2 mb-6">
+            {["No spreadsheets", "Apna Shopify + Meta + Google connect karo", "India-first, globally ready"].map((pt) => (
+              <div key={pt} className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
+                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
+                {pt}
               </div>
             ))}
           </div>
           <Link
             href="/sign-up"
-            className="inline-flex items-center gap-2 rounded-md bg-blue-500 hover:bg-blue-600 text-white font-semibold px-8 py-3 text-sm transition-colors"
+            className="inline-flex items-center gap-2 rounded-md bg-primary hover:bg-primary/90 text-white font-semibold px-7 py-3 text-sm transition-colors"
           >
-            Start free Margin Audit
+            <IndianRupee className="h-4 w-4" />
+            Free Margin Audit shuru karo
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-white/8 px-6 py-8 text-center text-xs text-zinc-500">
-        <p>© 2026 Sarthi Technologies Pvt. Ltd. · India-first, geography-agnostic · AWS Mumbai + Singapore · Made for D2C founders 🚀</p>
+      {/* ── FOOTER ──────────────────────────────────────────────────── */}
+      <footer className="border-t border-border/60 px-4 sm:px-6 py-8 text-center">
+        <div className="flex items-center justify-center gap-2 mb-3">
+          <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary">
+            <Layers className="h-3.5 w-3.5 text-white" />
+          </div>
+          <span className="font-bold text-sm">Sarthi</span>
+        </div>
+        <p className="text-xs text-muted-foreground">
+          © 2026 Sarthi Technologies Pvt. Ltd. · Proudly built in Bharat 🇮🇳
+        </p>
+        <p className="text-xs text-muted-foreground mt-1">
+          India-first · Geography-agnostic · AWS Mumbai + Singapore
+        </p>
       </footer>
     </div>
   )
