@@ -3,10 +3,8 @@
 import { useState } from "react"
 import { Header } from "@/components/dashboard/header"
 import { ActionCard } from "@/components/dashboard/action-card"
-import { Badge } from "@/components/ui/badge"
 import { DEMO_ACTIONS } from "@/lib/demo-data/actions"
 import { formatCurrency } from "@/lib/utils"
-import { TrendingUp, Clock, CheckCircle2 } from "lucide-react"
 import type { AgentAction } from "@/types"
 
 const AGENTS = ["all", "acquisition", "margin_analyst", "quick_commerce", "orchestrator"]

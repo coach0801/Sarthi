@@ -2,8 +2,7 @@ import { Header } from "@/components/dashboard/header"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { generateDemoData, computeSummaryMetrics } from "@/lib/demo-data/generator"
-import { Progress } from "@/components/ui/progress"
-import { TrendingUp, TrendingDown, Minus } from "lucide-react"
+import { TrendingUp, TrendingDown } from "lucide-react"
 
 export const dynamic = "force-dynamic"
 
