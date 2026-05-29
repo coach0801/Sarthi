@@ -6,23 +6,30 @@ import { cn } from "@/lib/utils"
 import {
   LayoutDashboard,
   TrendingUp,
-  Users,
+  Megaphone,
+  Globe,
   LineChart,
-  Package,
-  BadgeIndianRupee,
+  BarChart3,
+  Bot,
+  ClipboardList,
+  ScrollText,
   Settings,
   ChevronRight,
   Layers,
-  Activity,
+  Zap,
 } from "lucide-react"
 
 const NAV_ITEMS = [
-  { href: "/dashboard", label: "Home", icon: LayoutDashboard },
-  { href: "/dashboard/profit", label: "Munaafa", icon: TrendingUp, labelHindi: "मुनाफ़ा" },
-  { href: "/dashboard/udhaar", label: "Udhaar", icon: Users, labelHindi: "उधार" },
-  { href: "/dashboard/cashflow", label: "Cash Flow", icon: LineChart },
-  { href: "/dashboard/stock", label: "Stock Alerts", icon: Package },
-  { href: "/dashboard/loan", label: "Loan Ready", icon: BadgeIndianRupee },
+  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard, exact: true },
+  { href: "/dashboard/margin-audit", label: "Margin Audit", icon: Zap, accent: "emerald" },
+  { href: "/dashboard/margin", label: "Margin Waterfall", icon: TrendingUp },
+  { href: "/dashboard/actions", label: "Action Center", icon: ClipboardList },
+  { href: "/dashboard/ads", label: "Ad Intelligence", icon: Megaphone },
+  { href: "/dashboard/channels", label: "Channels", icon: Globe },
+  { href: "/dashboard/benchmarks", label: "Benchmarks", icon: BarChart3 },
+  { href: "/dashboard/forecast", label: "Forecast", icon: LineChart },
+  { href: "/dashboard/agents", label: "AI Agents", icon: Bot },
+  { href: "/dashboard/audit-log", label: "Audit Log", icon: ScrollText },
 ]
 
 export function Sidebar() {
@@ -37,54 +44,53 @@ export function Sidebar() {
         </div>
         <div>
           <span className="font-bold text-base tracking-tight">Sarthi</span>
-          <p className="text-[9px] text-muted-foreground leading-none">साथी आपके बिज़नेस का</p>
+          <p className="text-[9px] text-muted-foreground leading-none">D2C growth operator</p>
         </div>
         <span className="ml-auto text-[10px] text-muted-foreground bg-muted px-1.5 py-0.5 rounded font-medium">BETA</span>
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 overflow-y-auto py-4 px-2">
+      <nav className="flex-1 overflow-y-auto py-3 px-2">
         <ul className="space-y-0.5">
           {NAV_ITEMS.map((item) => {
-            const isActive = pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(item.href))
+            const isActive = item.exact
+              ? pathname === item.href
+              : pathname === item.href || pathname.startsWith(item.href + "/")
+            const isAccent = item.accent === "emerald"
+
             return (
               <li key={item.href}>
                 <Link
                   href={item.href}
                   className={cn(
                     "flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                    isActive
+                    isActive && isAccent
+                      ? "bg-emerald-500/15 text-emerald-300"
+                      : isActive
                       ? "bg-primary/10 text-primary"
+                      : isAccent
+                      ? "text-emerald-500 hover:bg-emerald-500/10"
                       : "text-muted-foreground hover:bg-muted hover:text-foreground"
                   )}
                 >
                   <item.icon className="h-4 w-4 flex-shrink-0" />
                   <span className="flex-1">{item.label}</span>
-                  {"labelHindi" in item && item.labelHindi && (
-                    <span className="text-[10px] text-muted-foreground">{item.labelHindi}</span>
-                  )}
                   {isActive && <ChevronRight className="h-3 w-3" />}
                 </Link>
               </li>
             )
           })}
         </ul>
-
-        <div className="mt-4 pt-4 border-t border-border/60">
-          <Link
-            href="/dashboard/margin-audit"
-            className={cn(
-              "flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium transition-colors",
-              pathname.startsWith("/dashboard/margin-audit")
-                ? "bg-emerald-500/20 text-emerald-300"
-                : "bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20"
-            )}
-          >
-            <Activity className="h-4 w-4" />
-            Business Health Check
-          </Link>
-        </div>
       </nav>
+
+      {/* Brand indicator */}
+      <div className="px-3 pb-2">
+        <div className="rounded-md border border-border/60 bg-white/2 px-3 py-2">
+          <p className="text-[10px] text-muted-foreground">Demo brand</p>
+          <p className="text-xs font-semibold">Glow &amp; Beyond</p>
+          <p className="text-[10px] text-muted-foreground">Skincare · Shopify + 3 channels</p>
+        </div>
+      </div>
 
       {/* Footer */}
       <div className="border-t border-border/60 p-2">
