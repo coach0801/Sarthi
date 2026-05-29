@@ -12,6 +12,8 @@ import {
   Activity,
   Globe,
   IndianRupee,
+  Bell,
+  ScrollText,
 } from "lucide-react"
 
 const ECOSYSTEM = [
@@ -86,6 +88,26 @@ const FEATURES = [
     color: "text-cyan-400",
     bg: "bg-cyan-500/10",
     border: "border-cyan-500/20",
+  },
+  {
+    icon: Bell,
+    title: "Daily Brief — every 7am",
+    hindi: "रोज़ सुबह तैयार report",
+    desc: "Orchestrator assembles your P&L summary, top 3 actions, and 5 key observations every morning. Delivered on WhatsApp + email. No dashboards to open.",
+    badge: "Orchestrator",
+    color: "text-purple-400",
+    bg: "bg-purple-500/10",
+    border: "border-purple-500/20",
+  },
+  {
+    icon: ScrollText,
+    title: "Full Audit Trail",
+    hindi: "हर action का हिसाब",
+    desc: "Every recommendation, every action, every outcome — logged immutably with full reasoning. Rollback any executed action in 24 hours with one tap.",
+    badge: "Trust Layer",
+    color: "text-zinc-400",
+    bg: "bg-zinc-500/10",
+    border: "border-zinc-500/20",
   },
 ]
 
@@ -211,10 +233,10 @@ export default function LandingPage() {
             <Layers className="h-4 w-4 text-white" />
           </div>
           <span className="font-bold text-base">Sarthi</span>
-          <span className="text-[10px] text-muted-foreground ml-1 hidden md:inline">साथी आपके brand का</span>
+          <span className="text-[10px] text-muted-foreground border border-border/50 px-1.5 py-0.5 rounded font-medium hidden sm:inline">D2C Growth OS</span>
         </div>
-        <div className="flex items-center gap-2">
-          <Link href="/sign-in" className="text-sm text-muted-foreground hover:text-foreground transition-colors px-2 py-1.5 hidden sm:block">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <Link href="/sign-in" className="text-sm font-medium text-foreground/90 hover:text-foreground transition-colors px-3 py-1.5 rounded-md border border-border/70 hover:border-border hover:bg-white/5 hidden sm:block">
             Sign in
           </Link>
           <Link href="/sign-up" className="text-sm font-semibold bg-primary hover:bg-primary/90 text-white px-4 py-1.5 rounded-md transition-colors">
@@ -326,7 +348,7 @@ export default function LandingPage() {
             <h2 className="text-xl sm:text-2xl font-bold mb-2">Every metric that matters to a D2C founder</h2>
             <p className="text-sm text-muted-foreground">हर rupee की सच — tracked automatically</p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {FEATURES.map((f) => (
               <div key={f.title} className={`rounded-xl border ${f.border} bg-card p-5`}>
                 <div className="flex items-center gap-3 mb-3">
@@ -342,6 +364,56 @@ export default function LandingPage() {
                 <p className="text-xs text-muted-foreground leading-relaxed">{f.desc}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── HUMAN-IN-THE-LOOP GUARANTEE ─────────────────────────────── */}
+      <section className="px-4 sm:px-6 pb-16 border-t border-border/60 pt-12">
+        <div className="mx-auto max-w-4xl">
+          <div className="rounded-2xl border border-primary/20 bg-primary/5 p-6 sm:p-8">
+            <div className="text-center mb-6">
+              <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-2">Human-in-the-Loop — Always</p>
+              <h2 className="text-lg sm:text-xl font-bold">Agents propose. You decide. Sarthi executes.</h2>
+              <p className="text-sm text-muted-foreground mt-2 max-w-lg mx-auto">
+                Sarthi agents never act without your approval — unless you explicitly set a rule to allow it. Every action is reversible.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {[
+                {
+                  icon: Bot,
+                  title: "Agent proposes",
+                  desc: "Agent finds an opportunity, computes the expected ₹ impact, and files a recommendation with full reasoning and confidence score.",
+                  color: "text-blue-400",
+                  bg: "bg-blue-500/10",
+                },
+                {
+                  icon: CheckCircle2,
+                  title: "You approve or decline",
+                  desc: "You see exactly what will happen and why. Approve in one tap — or decline and the agent learns from your decision.",
+                  color: "text-emerald-400",
+                  bg: "bg-emerald-500/10",
+                },
+                {
+                  icon: ScrollText,
+                  title: "Full audit + 24h rollback",
+                  desc: "Every action is logged immutably. Changed your mind? Rollback any executed action within 24 hours with a single tap.",
+                  color: "text-primary",
+                  bg: "bg-primary/10",
+                },
+              ].map((g) => (
+                <div key={g.title} className="flex items-start gap-3 p-4 rounded-xl bg-white/3 border border-border/40">
+                  <div className={`h-8 w-8 rounded-lg ${g.bg} flex items-center justify-center flex-shrink-0 mt-0.5`}>
+                    <g.icon className={`h-4 w-4 ${g.color}`} />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold mb-1">{g.title}</p>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{g.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

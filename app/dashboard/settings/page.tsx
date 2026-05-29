@@ -27,14 +27,14 @@ export default function SettingsPage() {
     <div className="flex flex-col flex-1">
       <Header title="Settings" subtitle="Connectors, permissions, notifications, team" />
 
-      <main className="flex-1 p-6 space-y-5">
+      <main className="flex-1 p-4 lg:p-6 space-y-4 lg:space-y-5">
         {/* Brand profile */}
         <Card className="border-border/60">
           <CardHeader className="pb-3">
             <CardTitle>Brand Profile</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="text-xs text-muted-foreground mb-1.5 block">Brand Name</label>
                 <Input defaultValue="Glow & Beyond" />
@@ -70,8 +70,8 @@ export default function SettingsPage() {
             </p>
             <div className="space-y-2">
               {PERMISSION_SETTINGS.map((p) => (
-                <div key={p.action} className="flex items-center justify-between py-2 border-b border-border/40 last:border-0">
-                  <span className="text-xs text-zinc-300">{p.action}</span>
+                <div key={p.action} className="flex items-start sm:items-center justify-between gap-2 py-2 border-b border-border/40 last:border-0">
+                  <span className="text-xs text-zinc-300 flex-1">{p.action}</span>
                   <div className="flex gap-1">
                     {p.options.map((opt) => (
                       <button

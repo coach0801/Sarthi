@@ -100,17 +100,17 @@ export default function AuditLogPage() {
     <div className="flex flex-col flex-1">
       <Header title="Audit Log" subtitle="Every agent action — immutable, searchable, reversible" />
 
-      <main className="flex-1 p-6 space-y-5">
-        <div className="grid grid-cols-3 gap-4 text-center">
+      <main className="flex-1 p-4 lg:p-6 space-y-4 lg:space-y-5">
+        <div className="grid grid-cols-3 gap-3 lg:gap-4 text-center">
           {[
             { label: "Total Actions (30d)", value: "47", desc: "across all agents" },
             { label: "Approval Rate", value: "71%", desc: "of proposed actions" },
             { label: "Avg Impact / Action", value: "₹38K", desc: "estimated monthly CM" },
           ].map((s) => (
             <div key={s.label} className="rounded-lg border border-border/60 p-4">
-              <p className="text-2xl font-bold">{s.value}</p>
-              <p className="text-xs text-muted-foreground mt-1">{s.label}</p>
-              <p className="text-xs text-muted-foreground">{s.desc}</p>
+              <p className="text-xl sm:text-2xl font-bold">{s.value}</p>
+              <p className="text-[10px] sm:text-xs text-muted-foreground mt-1">{s.label}</p>
+              <p className="text-[10px] sm:text-xs text-muted-foreground hidden sm:block">{s.desc}</p>
             </div>
           ))}
         </div>
